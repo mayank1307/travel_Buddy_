@@ -103,6 +103,7 @@ app.post("/checkout/:id",(req,res)=>{
     var i=0;
     var max_id="";
     var idlast="";
+    var namem="";
     mongoose.connect(url, { useUnifiedTopology: true,useNewUrlParser: true } ,function(err,db){
         assert.equal(null,err);
         Date.find({},function(err,dates){
@@ -131,16 +132,17 @@ app.post("/checkout/:id",(req,res)=>{
                         }
                         if(total>max){
                             max_id=result[i]._id;
+                            namem=result[i].name;
                         }
                     }
                     i=i+1;
                     total=0;
                 });
                 if(max_id===""){
-                    console.log('no match'+total+max);
+                    console.log('no match found');
                     // res.render('src/choice/congrats.html');
                 }else{
-                    console.log(idlast+" matched with "+max_id);
+                    console.log(idlast+"("+namem+") matched with "+max_id+"("+req.body.inputname+")");
                     // Date.update({'_id':max_id},{$set:{'match':idlast,'flag':"found"}});
                     // Date.update({'_id':idlast},{$set:{'match':max_id,'flag':"found"}});
                 }
