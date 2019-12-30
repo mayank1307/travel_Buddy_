@@ -112,7 +112,7 @@ app.post("/checkout/:id",(req,res)=>{
                 dates.forEach(function(doc,err){
                     result.push(doc);
                     idlast=result[i]._id;
-                    if(result[i].flag==="not-found" && id===result[i].choice){
+                    if(result[i].flag==="not-found" && id===result[i].choice && id!="solo"){
                         if(result[i].age-req.body.inputage){
                             total=total+20/(result[i].age-req.body.inputage);
                         }else if(result[i].age-req.body.inputage===0){
@@ -156,24 +156,6 @@ app.post("/checkout/:id",(req,res)=>{
     });
     res.render("src/choice/congrats.html");
 });
-app.post("/solopost",(req,res)=>{
-    var newDatas=new Date({
-        name:req.body.inputname,
-        phone:req.body.inputphone,
-        email:req.body.inputemail,
-        state:req.body.inputState,
-        lang:req.body.language,
-    });
-
-    newDatas.save(function(err,data){
-        if(err){
-            console.log("error");
-        }else{
-            console.log("saved");
-        }
-    });
-    res.render("src/choice/congrats.html");
-});
 
 app.get("/date",(req,res)=>{
     res.render("src/choice/date.html");
@@ -187,7 +169,7 @@ app.get("/group",(req,res)=>{
 app.get("/friends",(req,res)=>{
     res.render("src/choice/friends.html");
 });
-var PORT=process.env.PORT;
+var PORT=process.env.PORT || 5050;
 app.listen(PORT,()=>{
     console.log("server started on port "+PORT);
 });
