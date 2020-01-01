@@ -171,6 +171,24 @@ app.get("/group",(req,res)=>{
 app.get("/friends",(req,res)=>{
     res.render("src/choice/friends.html");
 });
+// app.get("/login",(req,res)=>{
+//     res.render("login.html");
+// });
+// app.get("/signup",(req,res)=>{
+//     res.render("log/signup.html");
+// });
+// app.get("/home",(req,res)=>{
+//     res.render("log/home.html");
+// });
+app.get("/log/login.html",(req,res)=>{
+    res.render("log/login.html");
+});
+app.get("/log/signup.html",(req,res)=>{
+    res.render("log/signup.html");
+});
+app.get("/log/home.html",(req,res)=>{
+    res.render("log/home.html");
+});
 var PORT=process.env.PORT || 5050;
 app.listen(PORT,()=>{
     console.log("server started on port "+PORT);
